@@ -10,25 +10,25 @@ public with sharing class BillAPI {
         //set up an Http object and an HTTPResponse Object and use the .getBody() method here.
 
         Http http = new Http();
-        HTTPResponse res = http.send(req);
+        HTTPResponse responseBody = http.send(req);
 
         //Parse the JSON response
 
-        if(response.getStatusCode()==200){
-            System.debug(res.getBody());
-
-            //Use the following to deserialize the JSON response into a wrapper class:
-
-            List<BillWrapper> bwList = (List<BillWrapper>)JSON.deserialize(responseBody, List<BillWrapper>.class);
+        if(responseBody.getStatusCode()==200){
+            System.debug(responseBody.getBody());
         } else {
-            System.debug('The status code returned was not expected: '+ response.getStatusCode()+ ' '+response.getStatus());
+            System.debug('The status code returned was not expected: '+ responseBody.getStatusCode()+ ' '+responseBody.getStatus());
         }
         
+         //Use the following to deserialize the JSON response into a wrapper class:
+
+         List<BillWrapper> bwList = (List<BillWrapper>)JSON.deserialize(responseBody.getBody(), List<BillWrapper>.class);
+
         //create a list of bills to insert
-        List <Bill__c> billsToInsert = new List<Bills__c> ();
+        List <Bill__c> billsToInsert = new List<Bill__c> ();
 
         //query for active accounts (Active__c = 'Yes')
-        List <Account> activeAccounts =[SELECT Name,Id From Account WHERE Active__c = 'YES'];
+        List<Account> activeAccounts = [SELECT Name,Id FROM Account WHERE Active__c = 'YES'];
 
         //create an active account map in the form of Map<String, Id>
 
@@ -38,7 +38,7 @@ public with sharing class BillAPI {
         // to insert the account name and Id as the key value pair.
         //https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_map.htm
 
-        for(Account acc:activeAcounts){
+        for(Account acc : activeAccounts){
             activeAccountMap.put (acc.Name,acc.Id);
         }
 
@@ -49,11 +49,11 @@ public with sharing class BillAPI {
         //remember, DML should not go in for loops!
 
        
-        for(BillWrapper bw:bwList){
+        for(BillWrapper bw : bwList){
             Bill__c bills = new Bill__c();
-            billsToInsert.Bill_Id__c = bw.billId;
-            billsToInsert.Account__c = activeAccountMap.get(bw.accountName);
-            billToInsert.Balance__c = Decimal.valueOf(bw.balance.replace('$', ''));
+            bills.Bill_Id__c = bw.billId;
+            bills.Account__c = activeAccountMap.get(bw.accountName);
+            bills.Balance__c = Decimal.valueOf(bw.balance.replace('$', ''));
 
             billsToInsert.add(bills);
             }
@@ -64,13 +64,14 @@ public with sharing class BillAPI {
        
        insert billsToInsert;
 
-       //Query for inserted bills
-       List<Bill__c> billsInserted = [SELECT Bill_Id__c,Account__c,Balance__c FROM Bill__c];
-
-       //Return Queried For Bills
-       return billsInserted;
     }
 
+    //Query for inserted bills
+    List<Bill__c> billsInserted = [SELECT Bill_Id__c,Account__c,Balance__c FROM Bill__c];
+
+    //Return Queried For Bills
+    //return billsInserted;
+    
     //this is what's known as a wrapper class. A wrapper class
     //allows us to create an instance of a class with the properties
     //we specify. In this case, we are creating a class that will hold
