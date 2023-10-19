@@ -1,6 +1,6 @@
 public with sharing class BillAPI {
     
-    public static void getBills() {
+    public static List<Bill__c> getBills() {
         //start by creating an HttpRequest object and set the endpoint and method.
        
         HttpRequest req = new HttpRequest();
@@ -64,13 +64,15 @@ public with sharing class BillAPI {
        
        insert billsToInsert;
 
+       //Query for inserted bills
+        List<Bill__c> billsInserted = [SELECT Bill_Id__c,Account__c,Balance__c FROM Bill__c];
+
+       //Return Queried For Bills
+         return billsInserted;
+
     }
 
-    //Query for inserted bills
-    List<Bill__c> billsInserted = [SELECT Bill_Id__c,Account__c,Balance__c FROM Bill__c];
-
-    //Return Queried For Bills
-    //return billsInserted;
+    
     
     //this is what's known as a wrapper class. A wrapper class
     //allows us to create an instance of a class with the properties
