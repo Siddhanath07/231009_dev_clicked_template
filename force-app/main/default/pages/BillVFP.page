@@ -1,4 +1,6 @@
 <apex:page standardController="Bill__c" renderAs="pdf">
+
+
     <!--
         The following outputTexts that are not rendered are used so that we
         can access the values for the fields in a table per documentation here:
@@ -68,10 +70,10 @@
     -->
     
     <apex:pageBlock title="Bill Summary">
-        <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c" width="100%">
-            <apex:column value="{!Bill__c.Name}" />
-            <apex:column value="{!Bill__c.Balance__c}" />
-            <apex:column value="{!Bill__c.Bill_Id__c}" />
+        <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c"  width="100%" >
+            <apex:column value="{!Bill__c.Name}"/>
+            <apex:column value="{!Bill__c.Balance__c}"/>
+            <apex:column value="{!Bill__c.Bill_Id__c}"/>
         </apex:pageBlockTable>
     </apex:pageBlock>   
 
