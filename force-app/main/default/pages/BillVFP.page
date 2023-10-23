@@ -69,9 +69,10 @@
         Hint: use apex:pageBlockTable to display this in a table.
     -->
     
-    <apex:pageBlock title="Bill Summary">
+    <h3> <apex:outputLabel value="Bill Summary" /> </h3>
+    <apex:pageBlock>
         <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c"  width="100%" >
-            <apex:column value="{!Bill__c.Name}"/>
+            <apex:column value="{!Bill__c.Name}" />
             <apex:column value="{!Bill__c.Balance__c}"/>
             <apex:column value="{!Bill__c.Bill_Id__c}"/>
         </apex:pageBlockTable>
