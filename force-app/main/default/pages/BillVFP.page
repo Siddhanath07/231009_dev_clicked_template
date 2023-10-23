@@ -14,6 +14,7 @@
         between the Bill__c and Account object, Account__r, as seen below:
     -->
     You are looking at the Most Recent Bill for {!Bill__c.Account__r.Name}.
+    <br />
     <!--
         The general format of fields on the Parent object will be:
         ChildObject__c.ParentObject__r.FieldName__c
@@ -28,29 +29,35 @@
 
         Hint: use apex:panelGrid and apex:PanelGroup to display this nicely.
     -->
-    <apex:panelGrid columns="2">
-        <apex:outputField value="{!Bill__c.Account__r.Email__c }"/>
-        <apex:outputField value="{!Bill__c.Account__r.Phone }"/>
-    </apex:panelGrid>
-
-    <apex:panelGrid columns="2">
+    <br />
+    <apex:panelGrid columns="2" width="100%">
         <apex:panelGroup>
-            <apex:outputLabel value="Billing Address" />
+            <b> <apex:outputLabel value="Email" /> </b>
+            <apex:outputText value="{!Bill__c.Account__r.Email__c}"/>
+        </apex:panelGroup>
+        
+        <apex:panelGroup>
+            <b> <apex:outputLabel value="Phone" /> </b>
+            <apex:outputText value="{!Bill__c.Account__r.Phone}"/>
+        </apex:panelGroup>
+        
+        <apex:panelGroup>
+            <b> <apex:outputLabel value="Billing Address" /> </b>
             <apex:outputPanel>
-              <apex:outputText value="{!Bill__c.Account__r.BillingStreet}" /> <br />
+              <apex:outputText value="{!Bill__c.Account__r.BillingStreet}" /> <br/>
               <apex:outputText value="{!Bill__c.Account__r.BillingState}" />&nbsp;
-              <apex:outputText value="{!Bill__c.Account__r.BillingCountry}" /> <br/>;
-              <apex:outputText value="{!Bill__c.Account__r.BillingPostalCode}" />
+              <apex:outputText value="{!Bill__c.Account__r.BillingCountry}" /> <br/>
+              <apex:outputText value="{!Bill__c.Account__r.BillingPostalCode}" /> <br/>
             </apex:outputPanel>
         </apex:panelGroup>
-
+       
         <apex:panelGroup>
-            <apex:outputLabel value="Shipping Address" />
+            <b> <apex:outputLabel value="Shipping Address" /> </b>
             <apex:outputPanel>
-              <apex:outputText value="{!Bill__c.Account__r.ShippingStreet}" /><br />
+              <apex:outputText value="{!Bill__c.Account__r.ShippingStreet}" /><br/>
               <apex:outputText value="{!Bill__c.Account__r.ShippingState}" />&nbsp;
-              <apex:outputText value="{!Bill__c.Account__r.ShippingCountry}" /> <br />
-              <apex:outputText value="{!Bill__c.Account__r.ShippingPostalCode}" />
+              <apex:outputText value="{!Bill__c.Account__r.ShippingCountry}" /> <br/>
+              <apex:outputText value="{!Bill__c.Account__r.ShippingPostalCode}" /> <br/>
             </apex:outputPanel>
         </apex:panelGroup>
     
@@ -59,11 +66,13 @@
         Build a table showing the Bill Summary (Bill Name, Bill Balance, and Bill Id) here.
         Hint: use apex:pageBlockTable to display this in a table.
     -->
+    
     <apex:pageBlock title="Bill Summary">
-        <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c">
-            <apex:column value="{!Bill__c.Name}"/>
-            <apex:column value="{!Bill__c.Balance__c}"/>
-            <apex:column value="{!Bill__c.Bill_Id__c}"/>
+        <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c" width="100%">
+            <apex:column value="{!Bill__c.Name}" />
+            <apex:column value="{!Bill__c.Balance__c}" />
+            <apex:column value="{!Bill__c.Bill_Id__c}" />
         </apex:pageBlockTable>
-    </apex:pageBlock>
+    </apex:pageBlock>   
+
 </apex:page>
