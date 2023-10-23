@@ -31,15 +31,39 @@
     <apex:panelGrid columns="2">
         <apex:outputField value="{!Bill__c.Account__r.Email__c }"/>
         <apex:outputField value="{!Bill__c.Account__r.Phone }"/>
-        <apex:outputField value="{!Bill__c.Account__r.BillingAddress }"/>
-        <apex:outputField value="{!Bill__c.Account__r.ShippingAddress }"/>
+    </apex:panelGrid>
+
+    <apex:panelGrid columns="2">
+        <apex:panelGroup>
+            <apex:outputLabel value="Billing Address" />
+            <apex:outputPanel>
+              <apex:outputText value="{!Bill__c.Account__r.BillingStreet}" /> <br />
+              <apex:outputText value="{!Bill__c.Account__r.BillingState}" />&nbsp;
+              <apex:outputText value="{!Bill__c.Account__r.BillingCountry}" /> <br/>;
+              <apex:outputText value="{!Bill__c.Account__r.BillingPostalCode}" />
+            </apex:outputPanel>
+        </apex:panelGroup>
+
+        <apex:panelGroup>
+            <apex:outputLabel value="Shipping Address" />
+            <apex:outputPanel>
+              <apex:outputText value="{!Bill__c.Account__r.ShippingStreet}" /><br />
+              <apex:outputText value="{!Bill__c.Account__r.ShippingState}" />&nbsp;
+              <apex:outputText value="{!Bill__c.Account__r.ShippingCountry}" /> <br />
+              <apex:outputText value="{!Bill__c.Account__r.ShippingPostalCode}" />
+            </apex:outputPanel>
+        </apex:panelGroup>
+    
     </apex:panelGrid>
     <!--
         Build a table showing the Bill Summary (Bill Name, Bill Balance, and Bill Id) here.
         Hint: use apex:pageBlockTable to display this in a table.
     -->
-    <apex:pageBlockSection>
-
-    </apex:pageBlockSection>
-    
+    <apex:pageBlock title="Bill Summary">
+        <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c">
+            <apex:column value="{!Bill__c.Name}"/>
+            <apex:column value="{!Bill__c.Balance__c}"/>
+            <apex:column value="{!Bill__c.Bill_Id__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
 </apex:page>
