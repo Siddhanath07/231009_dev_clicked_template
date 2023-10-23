@@ -2,7 +2,7 @@
     <!--
         The following outputTexts that are not rendered are used so that we
         can access the values for the fields in a table per documentation here:
-        https://help.salesforce.com/s/articleView?id=000385722&type=1
+        https://help.salesforce.com/s/articleView?id=000385722&type=1P
     -->
     <apex:outputText value="{!Bill__c.Name}" rendered="false"/>
     <apex:outputText value="{!Bill__c.Balance__c}" rendered="false"/>
@@ -28,12 +28,18 @@
 
         Hint: use apex:panelGrid and apex:PanelGroup to display this nicely.
     -->
-
-
+    <apex:panelGrid columns="2">
+        <apex:outputField value="{!Bill__c.Account__r.Email__c }"/>
+        <apex:outputField value="{!Bill__c.Account__r.Phone }"/>
+        <apex:outputField value="{!Bill__c.Account__r.BillingAddress }"/>
+        <apex:outputField value="{!Bill__c.Account__r.ShippingAddress }"/>
+    </apex:panelGrid>
     <!--
         Build a table showing the Bill Summary (Bill Name, Bill Balance, and Bill Id) here.
         Hint: use apex:pageBlockTable to display this in a table.
     -->
+    <apex:pageBlockSection>
 
+    </apex:pageBlockSection>
     
 </apex:page>

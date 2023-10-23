@@ -72,8 +72,6 @@ public with sharing class BillAPI {
 
     }
 
-    
-    
     //this is what's known as a wrapper class. A wrapper class
     //allows us to create an instance of a class with the properties
     //we specify. In this case, we are creating a class that will hold
