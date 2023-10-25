@@ -34,17 +34,17 @@
     <br />
     <apex:panelGrid columns="2" width="100%">
         <apex:panelGroup>
-            <b> <apex:outputLabel value="Email" /> </b>
+            <b> <apex:outputLabel value="Email" /> </b> <br/>
             <apex:outputText value="{!Bill__c.Account__r.Email__c}"/>
         </apex:panelGroup>
         
         <apex:panelGroup>
-            <b> <apex:outputLabel value="Phone" /> </b>
+            <b> <apex:outputLabel value="Phone" /> </b> <br/>
             <apex:outputText value="{!Bill__c.Account__r.Phone}"/>
         </apex:panelGroup>
         
         <apex:panelGroup>
-            <b> <apex:outputLabel value="Billing Address" /> </b>
+            <b> <apex:outputLabel value="Billing Address" /> </b> <br/>
             <apex:outputPanel>
               <apex:outputText value="{!Bill__c.Account__r.BillingStreet}" /> <br/>
               <apex:outputText value="{!Bill__c.Account__r.BillingState}" />&nbsp;
@@ -54,7 +54,7 @@
         </apex:panelGroup>
        
         <apex:panelGroup>
-            <b> <apex:outputLabel value="Shipping Address" /> </b>
+            <b> <apex:outputLabel value="Shipping Address" /> </b> <br/>
             <apex:outputPanel>
               <apex:outputText value="{!Bill__c.Account__r.ShippingStreet}" /><br/>
               <apex:outputText value="{!Bill__c.Account__r.ShippingState}" />&nbsp;
@@ -69,7 +69,7 @@
         Hint: use apex:pageBlockTable to display this in a table.
     -->
     
-    <h3> <apex:outputLabel value="Bill Summary" /> </h3>
+    <h3> <br/> <apex:outputLabel value="Bill Summary" /> </h3>
     <apex:pageBlock>
         <apex:pageBlockTable value="{!Bill__c.Account__r.Name}" var="Bill_c"  width="100%" >
             <apex:column value="{!Bill__c.Name}" />
