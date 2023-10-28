@@ -10,7 +10,7 @@ public with sharing class BillBatch implements Database.Batchable<sObject>, Data
         //query for the following fields:
         //Id, Bill_By_Email__c
 
-        return Database.getQueryLocator('SELECT Id, Bill_By_Email__c ' + ' From Account ' + ' WHERE Active__c = \'Yes\' AND Bill_By_Email != null');
+        return Database.getQueryLocator('SELECT Id, Bill_By_Email__c ' + ' From Account ' + ' WHERE Active__c = \'Yes\' AND Bill_By_Email__c != null');
 
     }
 
@@ -40,6 +40,7 @@ public with sharing class BillBatch implements Database.Batchable<sObject>, Data
 
         List<account> accountsWithBillByEmail = [SELECT Id, Email__c, (SELECT Id FROM Bills__r ORDER BY CreatedDate DESC) FROM Account WHERE Id IN :this.receivesBillByEmail];
         
+      
         //We will then iterate over the results of this query and associate the Id of the most recent bill (value) with the
         //corresponding Id of the account Id (key) in a Map<Id, Id> that we will call billMap, using the .put(Id, Id)
         //method of the Map class:
